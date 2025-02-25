@@ -1,7 +1,10 @@
 import React from 'react';
-import { Container, Typography, Grid, Card, CardContent, Button, Box } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
+// Fix for MUI's Button with React Router Link
+const CustomLink = React.forwardRef((props, ref) => <Link ref={ref} {...props} />);
 
 function Dashboard() {
   const upcomingTrip = { destination: 'Paris', date: 'June 1-7, 2025' };
@@ -19,7 +22,7 @@ function Dashboard() {
                 <Typography variant="h6">Upcoming Trip</Typography>
                 <Typography>{upcomingTrip.destination}</Typography>
                 <Typography color="textSecondary">{upcomingTrip.date}</Typography>
-                <Button component={Link} to="/chatbot" sx={{ mt: 1 }}>Plan More</Button>
+                <Button component={CustomLink} to="/chatbot" sx={{ mt: 1 }}>Plan More</Button>
               </CardContent>
             </Card>
           </motion.div>
@@ -37,7 +40,7 @@ function Dashboard() {
             <CardContent>
               <Typography variant="h6">Expenses</Typography>
               <Typography>Total Spent: ${totalSpent}</Typography>
-              <Button component={Link} to="/expenses" sx={{ mt: 1 }}>View Details</Button>
+              <Button component={CustomLink} to="/expenses" sx={{ mt: 1 }}>View Details</Button>
             </CardContent>
           </Card>
         </Grid>
